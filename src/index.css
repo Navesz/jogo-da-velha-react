@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  transition: all 500ms;
+}
+
+:root {
+  --background: #202124;
+  --cell-size: 100px;
+  --mark-size: calc(var(--cell-size) * .9)
+}
+
+body {
+  background-color: var(--background);
+}
+
+header {
+  text-align: center;
+  font: 400 12pt;
+  color: white;
+  margin: 64px 0 64px 0;
+} 
+
+.board {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: repeat(3, auto);
+}
+
+/* Board 'X' hover */
+
+.board.x .cell:not(.x, .o):hover::before,
+.board.x .cell:not(.x, .o):hover::after {
+  position: absolute;
+  content: '';
+  height: var(--mark-size);
+  width: calc(var(--mark-size) * .15);
+  background-color: #3d3d3d;
+  border-radius: 10px;
+}
+.board.x .cell:not(.x, .o):hover::before,
+.cell.x::before {
+  transform: rotate(45deg);
+}
+
+.board.x .cell:not(.x, .o):hover::after,
+.cell.x::after {
+  transform: rotate(-45deg);
+}
+
+/* Board 'O' hover */
+
+.board.o .cell:not(.x, .o):hover::before,
+.board.o .cell:not(.x, .o):hover::after {
+  position: absolute;
+  content: '';
+  height: calc(var(--mark-size) * .8);;
+  width: calc(var(--mark-size) * .8);;
+  background-color: #3d3d3d;
+  border-radius: 25%;
+}
+.board.o .cell:not(.x, .o):hover::after,
+.cell.o::after {
+  background-color: var(--background);
+  height: calc(var(--mark-size) * .50);
+  width: calc(var(--mark-size) * .50);
+}
+
+.board.o .cell:not(.x, .o):hover::after {
+  opacity: 0.9;
+}
+
+
+/* Cells config */
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border-top: none;
+  border-right: none;
+  cursor: pointer;
+}
+
+.cell:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.cell:nth-child(n + 7) {
+  border-bottom: none;
+}
+
+/* Cell 'X' mark */
+
+.cell.x::before,
+.cell.x::after {
+  position: absolute;
+  content: '';
+  height: var(--mark-size);
+  width: calc(var(--mark-size) * .15);
+  background-color: white;
+  border-radius: 10px;
+}
+
+.cell.x::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after {
+  transform: rotate(-45deg);
+}
+
+/* Cell 'O' mark */
+
+.cell.o::before,
+.cell.o::after {
+  position: absolute;
+  content: '';
+  height: calc(var(--mark-size) * .8);;
+  width: calc(var(--mark-size) * .8);;
+  background-color: white;
+  border-radius: 25%;
+}
+
+.cell.o::after {
+  background-color: var(--background);
+  height: calc(var(--mark-size) * .50);
+  width: calc(var(--mark-size) * .50);
+}
+
+.cell.x, 
+.cell.o {
+  cursor: default;
+}
+
+.restart-game {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(150, 150, 150, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 30px;
+  gap: 20px;
+  color: #202124;
+}
+
+.restart-game button {
+  font-size: 30px;
+  padding: 5px;
+  cursor: pointer;
+  border: 2px solid #202124;
+  border-radius: 10px;
+  color: #202124;
+}
+
+.restart-game button:hover {
+  transform: scale(1.1);
+  
+}
+
+
+.Game.end {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+.restart-game.show {
+  display: flex;
+}
