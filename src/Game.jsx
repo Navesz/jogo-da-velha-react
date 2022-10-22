@@ -1,11 +1,11 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import RestartGame from './RestartGame'
 
 
 
 function Game() {
 
-  const xTurn = useRef(true)
+  const xTurn = useState(true)
 
   const lines = [
     [0, 1, 2],
